@@ -11,8 +11,8 @@ class m250328_065356_create_client_table extends Migration
     {
         $this->createTable('client', [
             'id' => $this->primaryKey(),
-            'name' => $this->dateTime()->defaultExpression('CURRENT_TIMESTAMP'),
-            'created_at' => $this->integer()->notNull(),
+            'name' => $this->string(255)->notNull(),
+            'created_at' => $this->dateTime()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
     public function safeDown()
