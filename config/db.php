@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=steklo_crm',
-    'username' => 'steklo_crm',
-    'password' => '96*2u@husluv$m0v#5i1xv6kf',
+    'username' => 'root',
+    'password' => 'root',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
