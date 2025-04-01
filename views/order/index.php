@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Клиент', // Опционально: задаем заголовок
                 'format' => 'raw', // Разрешаем HTML
                 'value' => function ($model) {
-                    return Html::a(Html::encode($model->client->name), ['client/view', 'id' => $model->id]);
+                    return Html::a(Html::encode($model->client->name), ['client/view', 'id' => $model->client->id]);
                 },
             ],
             [
