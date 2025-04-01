@@ -43,7 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a(Html::encode($model->client->name), ['client/view', 'id' => $model->id]);
                         },
                     ],
-                    'amount',
+                    [
+                        'attribute' => 'amount',
+                        'label' => 'Сумма заказа', // Опционально: задаем заголовок
+                        'format' => ['decimal', 2], // 2 знака после запятой
+                        'value' => function ($model) {
+                            return $model->amount;
+                        },
+                    ],
                     'start_date',
                     'created_at',
                 ],
@@ -51,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-4 align-content-center center-align">
             <?php
-            echo '<h3>Прибыль: ' . $model->getProfit() . ' руб.</h3>'; ?>
+            echo '<h3>Прибыль: ' . number_format($model->getProfit(), 2, '.', ' ') . ' руб.</h3>'; ?>
         </div>
 
         </div>
@@ -65,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="vert-margin80">
             <!-- Список оплат -->
-            <h3>Оплаты по заказу (<?php echo $model->getTotalPayments(); ?>)</h3>
+            <h3>Оплаты по заказу (<?php echo number_format($model->getTotalPayments(), 2, '.', ' '); ?>)</h3>
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
                     'query' => Payment::find()->where(['order_id' => $model->id]),
@@ -76,7 +83,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'], // Номера строк
                     'payment_date',
-                    'amount',
+                    [
+                        'attribute' => 'amount',
+                        'label' => 'Сумма', // Опционально: задаем заголовок
+                        'format' => ['decimal', 2], // 2 знака после запятой
+                        'value' => function ($model) {
+                            return $model->amount;
+                        },
+                    ],
                     //'created_at:datetime',
                     [
                         'class' => 'yii\grid\ActionColumn',
@@ -96,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'action' => ['order/add-payment', 'id' => $model->id], // Указываем action для обработки
                 ]);
             ?>
-            <?= $form->field($payment, 'amount')->textInput(['type' => 'number', 'step' => '1000.00']) ?>
+            <?= $form->field($payment, 'amount')->textInput() ?>
             <?= $form->field($payment, 'payment_date')->widget(DatePicker::class, [
                 'dateFormat' => 'yyyy-MM-dd',
                 'options' => ['class' => 'form-control'],
@@ -110,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="vert-margin80">
             <!-- Список расходов -->
-            <h3>Расходы по заказу (<?php echo $model->getTotalExpenses(); ?>)</h3>
+            <h3>Расходы по заказу (<?php echo number_format($model->getTotalExpenses(), 2, '.', ' '); ?>)</h3>
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
                     'query' => Expense::find()->where(['order_id' => $model->id]),
@@ -121,7 +135,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                     'expense_date',
-                    'amount',
+                    [
+                        'attribute' => 'amount',
+                        'label' => 'Сумма', // Опционально: задаем заголовок
+                        'format' => ['decimal', 2], // 2 знака после запятой
+                        'value' => function ($model) {
+                            return $model->amount;
+                        },
+                    ],
                     'description',
 
                     //'created_at:datetime',
@@ -144,7 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'action' => ['order/add-expense', 'id' => $model->id], // Указываем action для обработки
             ]);
             ?>
-            <?= $form->field($expense, 'amount')->textInput(['type' => 'number', 'step' => '1000.00']) ?>
+            <?= $form->field($expense, 'amount')->textInput() ?>
             <?= $form->field($expense, 'description')->textarea(['rows' => 5, 'maxlength' => true]) ?>
             <?= $form->field($expense, 'expense_date')->widget(DatePicker::class, [
                 'dateFormat' => 'yyyy-MM-dd',

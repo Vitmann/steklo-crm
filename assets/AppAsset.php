@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/jquery.inputmask.min.js', // Убедитесь, что файл доступен
     ];
     public $depends = [
         'yii\web\YiiAsset',

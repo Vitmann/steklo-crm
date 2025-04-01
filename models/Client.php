@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "client".
@@ -29,7 +30,9 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'safe'],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -43,6 +46,26 @@ class Client extends \yii\db\ActiveRecord
             'name' => 'Название',
             'created_at' => 'Дата добавления',
         ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+                'value' => function () {
+                    return date('Y-m-d H:i:s');
+                },
+            ],
+        ];
+    }
+
+    // Связь с таблицей contacts
+    public function getContacts()
+    {
+        return $this->hasMany(Contact::class, ['client_id' => 'id']);
     }
 
 }

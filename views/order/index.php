@@ -45,7 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'start_date',
-            'created_at',
+            //'created_at',
+            [
+                'label' => 'Прибыль', // Заголовок колонки
+                'value' => function ($model) {
+                    return $model->getProfit(); // Вызов метода getProfit()
+                },
+                'format' => ['decimal', 2], // Формат с двумя знаками после запятой
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Order $model, $key, $index, $column) {

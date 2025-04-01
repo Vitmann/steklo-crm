@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8457966b790099773946dd9a083c0516",
+    "content-hash": "a149b0079c2a1aca3aa5ce3be5329ad4",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -550,6 +550,52 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
             "time": "2024-09-11T13:17:53+00:00"
+        },
+        {
+            "name": "robinherbots/jquery.inputmask",
+            "version": "5.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "reference": "310a33557e2944daf86d5946a5e8c82b9118f8f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/310a33557e2944daf86d5946a5e8c82b9118f8f7",
+                "reference": "310a33557e2944daf86d5946a5e8c82b9118f8f7",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Herbots"
+                }
+            ],
+            "description": "Inputmask is a javascript library which creates an input mask.  Inputmask can run against vanilla javascript, jQuery and jqlite.",
+            "homepage": "http://robinherbots.github.io/Inputmask",
+            "keywords": [
+                "form",
+                "input",
+                "inputmask",
+                "jquery",
+                "mask",
+                "plugins"
+            ],
+            "support": {
+                "issues": "https://github.com/RobinHerbots/Inputmask/issues",
+                "source": "https://github.com/RobinHerbots/Inputmask/tree/5.0.9"
+            },
+            "funding": [
+                {
+                    "url": "https://PayPal.Me/robinherbots",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-05-31T09:17:28+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
