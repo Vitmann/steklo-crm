@@ -15,8 +15,8 @@ AppAsset::register($this);
 $this->registerCsrfMetaTags();
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
-$this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
-$this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
+$this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->params['meta_description'] ?? '']);
+$this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 ?>
 <?php $this->beginPage() ?>
@@ -32,7 +32,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => Yii::$app->params['siteName'],
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
@@ -41,10 +41,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     if (Yii::$app->user->isGuest) {
         // Для гостей
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Login', 'url' => ['/site/login']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'О проекте', 'url' => ['/site/about']],
+            ['label' => 'Контакты', 'url' => ['/site/contact']],
+            ['label' => 'Авторизация', 'url' => ['/site/login']],
         ];
     } else {
         // Для залогиненных пользователей
