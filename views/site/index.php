@@ -7,45 +7,42 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">Congratulations!</h1>
+        <h1 class="display-4">Добро пожаловать на StekloCRM</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Простая CRM система, для организации работы с клиентами.</p>
 
-        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
+            <div class="col-lg-6">
+                <h2>Упрощение управления клиентами и повышение эффективности работы</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p><strong>Решение проблемы:</strong> Простая CRM-система позволяет централизованно хранить всю
+                    информацию о клиентах — их контакты, историю заказов, предпочтения и взаимодействия. Вместо
+                    разрозненных записей в таблицах Excel, записных книжках или заметках на телефоне вы получаете единое
+                    место, где все данные легко доступны. Это сокращает время на поиск информации и помогает сотрудникам
+                    быстрее реагировать на запросы клиентов.</p>
+                <p><strong>Пример:</strong> Представьте, что клиент звонит с вопросом о своем заказе. Без CRM менеджеру
+                    пришлось бы искать данные в разных местах, а с CRM он сразу видит всю историю клиента — от даты
+                    заказа до последней оплаты.</p>
+                <p><strong>Выгода: </strong>Экономия времени, снижение ошибок и улучшение качества обслуживания.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
             </div>
-            <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
+            <div class="col-lg-6">
+                <h2>Автоматизация рутинных задач</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                <p><strong>Описание: </strong>Простая CRM-система не требует сложной настройки или глубоких технических
+                    знаний, что делает её идеальной для малого бизнеса или команд, которые только начинают использовать
+                    такие инструменты. Она обычно имеет интуитивно понятный интерфейс и базовый функционал (управление
+                    клиентами, заказами, контактами), который можно быстро освоить. При этом она дешевле и проще в
+                    обслуживании, чем сложные корпоративные решения.</p>
+                <p><strong>Пример: </strong>Ваша команда может начать использовать CRM вроде той, что мы разрабатываем
+                    (с клиентами, заказами и контактами), буквально за день — достаточно загрузить данные клиентов и
+                    настроить доступ.</p>
+                <p><strong>Выгода: </strong>Быстрый старт, низкие затраты на обучение и внедрение, адаптация под
+                    небольшие команды.</p>
             </div>
         </div>
 
