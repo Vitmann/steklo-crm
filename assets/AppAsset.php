@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'vendor/twbs/bootstrap-icons/font/bootstrap-icons.css',
     ];
     public $js = [
         'js/jquery.inputmask.min.js', // Убедитесь, что файл доступен

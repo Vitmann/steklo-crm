@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h1 class="vert-margin30"><?= Html::encode($this->title) ?>
-    <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+    <?= Html::a('<i class="bi bi-pencil"></i> Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('<i class="bi bi-trash"></i> Удалить', ['delete', 'id' => $model->id], [
         'class' => 'btn btn-danger',
         'data' => [
             'confirm' => 'Вы уверены что хотите удалить?',
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ]) ?>
-        <?= Html::a('Создать новый заказ', ['order/create', 'client_id' => $model->id], ['class' => 'btn btn-success']
+        <?= Html::a('<i class="bi bi-cart-plus"></i> Создать новый заказ', ['order/create', 'client_id' => $model->id], ['class' => 'btn btn-success']
         ) ?>
     </div>
 
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ]) ?>
-        <?= Html::a('Добавить контакт', ['contact/create', 'client_id' => $model->id], ['class' => 'btn btn-success']
+        <?= Html::a('<i class="bi bi-phone"></i> Добавить контакт', ['contact/create', 'client_id' => $model->id], ['class' => 'btn btn-success']
         ) ?>
     </div>
 </div>

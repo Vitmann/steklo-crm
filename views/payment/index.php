@@ -9,16 +9,14 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Payments';
+$this->title = 'Оплаты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="payment-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Payment', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <h1><?= Html::encode($this->title) ?>
+        <?= Html::a('Добавить оплату', ['create'], ['class' => 'btn btn-success']) ?>
+    </h1>
 
 
     <?= GridView::widget([

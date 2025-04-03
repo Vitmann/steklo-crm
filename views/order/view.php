@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="vert-margin80">
 
     <h1 class="vert-margin30">Заказ №<?= Html::encode($this->title) ?> (<?php echo $model->client->name ?>)
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a('<i class="bi bi-pencil"></i> Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<i class="bi bi-trash"></i> Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Вы уверены что хотите удалить заказ?',
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="vert-margin80">
             <!-- Список оплат -->
-            <h3>Оплаты по заказу (<?php echo number_format($model->getTotalPayments(), 2, '.', ' '); ?>)</h3>
+            <h4>Оплаты по заказу (<?php echo number_format($model->getTotalPayments(), 2, '.', ' '); ?>)</h4>
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
                     'query' => Payment::find()->where(['order_id' => $model->id]),
@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dateFormat' => 'yyyy-MM-dd',
                 'options' => ['class' => 'form-control'],
             ]) ?>
-            <?= Html::submitButton('Добавить оплату', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('<i class="bi bi-patch-plus"></i> Добавить оплату', ['class' => 'btn btn-success']) ?>
             <?php
             ActiveForm::end(); ?>
         </div>
@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="vert-margin80">
             <!-- Список расходов -->
-            <h3>Расходы по заказу (<?php echo number_format($model->getTotalExpenses(), 2, '.', ' '); ?>)</h3>
+            <h4>Расходы по заказу (<?php echo number_format($model->getTotalExpenses(), 2, '.', ' '); ?>)</h4>
             <?= GridView::widget([
                 'dataProvider' => new \yii\data\ActiveDataProvider([
                     'query' => Expense::find()->where(['order_id' => $model->id]),
@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dateFormat' => 'yyyy-MM-dd',
                 'options' => ['class' => 'form-control'],
             ]) ?>
-            <?= Html::submitButton('Добавить расход', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('<i class="bi bi-patch-minus"></i> Добавить расход', ['class' => 'btn btn-success']) ?>
             <?php
             ActiveForm::end(); ?>
         </div>

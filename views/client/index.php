@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="client-index">
 
     <h1><?= Html::encode($this->title) ?>
-        <?= Html::a('Новый клиент', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="bi bi-patch-plus"></i>  Новый клиент', ['create'], ['class' => 'btn btn-success']) ?>
     </h1>
 
 
