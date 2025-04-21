@@ -33,7 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Клиент', // Опционально: задаем заголовок
                 'format' => 'raw', // Разрешаем HTML
                 'value' => function ($model) {
-                    return Html::a(Html::encode($model->client->name), ['client/view', 'id' => $model->client->id]);
+                    if ($model->client) {
+                        return Html::a(Html::encode($model->client->name), ['client/view', 'id' => $model->client->id]);
+                    }
                 },
             ],
             [
@@ -41,7 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Сумма заказа', // Опционально: задаем заголовок
                 'format' => 'raw', // Разрешаем HTML
                 'value' => function ($model) {
-                    return Html::a(Html::encode(number_format($model->amount, 2, '.', ' ')), ['order/view', 'id' => $model->id]);
+                    return Html::a(
+                        Html::encode(number_format($model->amount, 2, '.', ' ')),
+                        ['order/view', 'id' => $model->id]
+                    );
                 },
             ],
             'start_date',
@@ -57,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Order $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
