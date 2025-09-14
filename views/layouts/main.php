@@ -47,12 +47,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'О проекте', 'url' => ['/site/about']],
             ['label' => 'Контакты', 'url' => ['/site/contact']],
-            ['label' => 'Авторизация', 'url' => ['/site/login']],
+            ['label' => 'Вход', 'url' => ['/site/login']],
+            ['label' => 'Регистрация', 'url' => ['/site/register']],
         ];
     } else {
         // Для залогиненных пользователей
-        $menuItems[] = ['label' => 'Клиенты', 'url' => ['/client/']];
-        $menuItems[] = ['label' => 'Заказы', 'url' => ['/order/']];
         $menuItems[] = [
             'label' => 'Выход (' . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
@@ -72,11 +71,49 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
-        <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
-        <?php endif ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <div class="row">
+                <div class="col-md-3">
+                    <?php
+                    echo \yii\bootstrap5\Nav::widget([
+                        'options' => [
+                            'class' => 'nav flex-column nav-pills sidebar-menu bg-light p-3 rounded shadow-sm',
+                            'style' => 'min-height:200px;'
+                        ],
+                        'items' => [
+                            [
+                                'label' => '<i class="bi bi-people"></i> Клиенты',
+                                'url' => ['/client/'],
+                                'encode' => false
+                            ],
+                            [
+                                'label' => '<i class="bi bi-bag"></i> Заказы',
+                                'url' => ['/order/'],
+                                'encode' => false
+                            ],
+                        ],
+                    ]);
+                    ?>
+                </div>
+                <div class="col-md-9">
+                    <?php if (!empty($this->params['breadcrumbs'])): ?>
+                        <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+                    <?php endif ?>
+
+                    <?= Alert::widget() ?>
+
+                    <?= $content ?>
+                </div>
+            </div>
+        <?php else: ?>
+            <?php if (!empty($this->params['breadcrumbs'])): ?>
+                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+            <?php endif ?>
+
+            <?= Alert::widget() ?>
+
+            <?= $content ?>
+        <?php endif; ?>
     </div>
 </main>
 

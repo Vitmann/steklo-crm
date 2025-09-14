@@ -9,6 +9,10 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\RegisterForm;
+use app\models\Company;
+use app\models\User;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -124,5 +128,102 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Registration action.
+     *
+     * @return Response|string
+     */
+    public function actionRegister()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $model = new RegisterForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $company = new Company();
+                $company->name = $model->company_name;
+                $company->created_at = $company->updated_at = time();
+                if (!$company->save()) {
+                    $model->addError('company_name', 'Не удалось создать компанию.');
+                    if (isset($transaction) && $transaction) {
+                        $transaction->rollBack();
+                    }
+                    return $this->render('register', ['model' => $model]);
+                }
+                $user = new User();
+                $user->username = $model->username;
+                $user->email = $model->email;
+                $user->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                $user->created_at = $user->updated_at = time();
+                $user->company_id = $company->id;
+                $user->is_confirmed = false;
+                $user->generateEmailConfirmToken();
+                if (!$user->save()) {
+                    $model->addErrors($user->getErrors());
+                    if (isset($transaction) && $transaction) {
+                        $transaction->rollBack();
+                    }
+                    return $this->render('register', ['model' => $model]);
+                }
+                // Отправка письма с подтверждением
+                $confirmUrl = Url::to(['/site/confirm-email', 'token' => $user->email_confirm_token], true);
+                Yii::$app->mailer->compose()
+                    ->setFrom(['noreply@example.com' => 'CRM'])
+                    ->setTo($user->email)
+                    ->setSubject('Подтверждение регистрации')
+                    ->setHtmlBody("Для подтверждения email перейдите по ссылке: <a href='$confirmUrl'>$confirmUrl</a>")
+                    ->send();
+                if (isset($transaction) && $transaction) {
+                    $transaction->commit();
+                }
+                Yii::$app->session->setFlash('success', 'Регистрация прошла успешно! Проверьте почту для подтверждения email.');
+                return $this->redirect(['site/login']);
+            } catch (\Exception $e) {
+                if (isset($transaction) && $transaction) {
+                    $transaction->rollBack();
+                }
+                $model->addError('company_name', 'Ошибка регистрации: ' . $e->getMessage());
+            }
+        }
+        return $this->render('register', ['model' => $model]);
+    }
+
+    public function actionConfirmEmail($token)
+    {
+        $user = User::findByEmailConfirmToken($token);
+        if (!$user) {
+            Yii::$app->session->setFlash('error', 'Некорректный или устаревший токен подтверждения.');
+            return $this->redirect(['site/login']);
+        }
+
+        // Сохраняем ID пользователя до подтверждения
+        $userId = $user->id;
+
+        // Подтверждаем email
+        $user->confirmEmail();
+
+        // Теперь ищем пользователя заново (так как is_confirmed изменился)
+        $user = User::findOne($userId);
+
+        if (!$user || !$user->is_confirmed) {
+            Yii::$app->session->setFlash('error', 'Ошибка подтверждения email.');
+            return $this->redirect(['site/login']);
+        }
+
+        // Пробуем авторизоваться
+        $loginResult = Yii::$app->user->login($user, 3600*24*30);
+
+        if ($loginResult) {
+            Yii::$app->session->setFlash('success', 'Email успешно подтверждён! Вы автоматически вошли в систему.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Email подтверждён, но автоматический вход не выполнен. Пожалуйста, войдите вручную.');
+        }
+
+        return $this->goHome();
     }
 }
