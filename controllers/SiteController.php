@@ -181,8 +181,7 @@ class SiteController extends Controller
                 if (isset($transaction) && $transaction) {
                     $transaction->commit();
                 }
-                Yii::$app->session->setFlash('success', 'Регистрация прошла успешно! Проверьте почту для подтверждения email.');
-                return $this->redirect(['site/login']);
+                return $this->redirect(['site/email-sent']);
             } catch (\Exception $e) {
                 if (isset($transaction) && $transaction) {
                     $transaction->rollBack();
@@ -191,6 +190,20 @@ class SiteController extends Controller
             }
         }
         return $this->render('register', ['model' => $model]);
+    }
+
+    /**
+     * Displays email confirmation waiting page.
+     *
+     * @return string
+     */
+    public function actionEmailSent()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        return $this->render('email-sent');
     }
 
     public function actionConfirmEmail($token)
