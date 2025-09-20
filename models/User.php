@@ -44,7 +44,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['auth_key'], 'string', 'max' => 32],
             [['email_confirm_token'], 'string', 'max' => 64],
             [['is_confirmed'], 'boolean'],
-            [['username'], 'unique'],
             [['email'], 'unique'],
             [['email'], 'email'],
         ];

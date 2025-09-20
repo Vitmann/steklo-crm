@@ -172,11 +172,13 @@ class SiteController extends Controller
                 }
                 // Отправка письма с подтверждением
                 $confirmUrl = Url::to(['/site/confirm-email', 'token' => $user->email_confirm_token], true);
-                Yii::$app->mailer->compose()
+                Yii::$app->mailer->compose('email-confirm', [
+                        'confirmUrl' => $confirmUrl,
+                        'user' => $user
+                    ])
                     ->setFrom(['noreply@example.com' => 'CRM'])
                     ->setTo($user->email)
                     ->setSubject('Подтверждение регистрации')
-                    ->setHtmlBody("Для подтверждения email перейдите по ссылке: <a href='$confirmUrl'>$confirmUrl</a>")
                     ->send();
                 if (isset($transaction) && $transaction) {
                     $transaction->commit();

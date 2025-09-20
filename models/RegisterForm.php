@@ -18,7 +18,6 @@ class RegisterForm extends Model
             [['company_name', 'username', 'email', 'password', 'password_repeat'], 'required'],
             [['company_name', 'username', 'email'], 'string', 'max' => 255],
             [['company_name'], 'unique', 'targetClass' => Company::class, 'targetAttribute' => 'name', 'message' => 'Компания с таким названием уже существует.'],
-            [['username'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'username', 'message' => 'Пользователь с таким именем уже существует.'],
             [['email'], 'unique', 'targetClass' => User::class, 'targetAttribute' => 'email', 'message' => 'Пользователь с таким email уже существует.'],
             [['email'], 'email'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'message' => 'Пароли не совпадают.'],
